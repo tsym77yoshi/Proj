@@ -1,0 +1,13 @@
+{% extends 'Mainapp/base.html' %}
+
+{% block content %}
+{% include 'Mainapp/css.html' %}
+<div class="container">
+  <div class="rightcon">
+    {% include 'Mainapp/security/month.html' %}
+  </div>
+  <div class="leftcon">
+    {% include 'Mainapp/security/dayschedule.html' %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+<table>
+  <tbody>
+    <tr>
+      <th>日付</th>
+      <td>{{ checkschedule.date }}</td>
+    </tr>
+    <tr>
+      <th>時間帯</th>
+      <td>{{ checkschedule.time }}</td>
+    </tr>
+    <tr>
+      <th>借りたい教室</th>
+      <td>{{ checkschedule.place.name }}</td>
+    </tr>
+    <tr>
+      <th>組織</th>
+      <td>{{ checkschedule.organization }}</td>
+    </tr>
+    <tr style="height: 1em;"></tr>
+    <tr>
+      <th>確認した先生</th>
+      <td>{{ checkschedule.teacherSeal }}</td>
+    </tr>
+    <tr>
+      <th>確認した教務</th>
+      <td>{{ checkschedule.affairsSeal }}</td>
+    </tr>
+    {% if schedule.place.IsNeedCheck %}
+    <tr>
+      <th>確認した施設管理者</th>
+      <td>{{ checkschedule.roomSeal }}</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+<div style="height: 30px;"></div>
+
+{% if user.get_username == "staff" or user.get_username == "admin" %}
+<form action="{% url 'Mainapp:form' 'tSeal' checkschedule.id roomFilter %}" method="POST">{% csrf_token %}
+  <label>確認した先生の名前</label>
+  {{ tseal.teacherSeal }}
+  <button type="submit">確認</button>
+</form>
+
+<form action="{% url 'Mainapp:form' 'aSeal' checkschedule.id roomFilter %}" method="POST">{% csrf_token %}
+  <label>確認した教務の名前</label>
+  {{ aseal.affairsSeal }}
+  <button type="submit">確認</button>
+</form>
+{% if checkschedule.place.IsNeedCheck %}
+<form action="{% url 'Mainapp:form' 'rSeal' checkschedule.id roomFilter %}" method="POST">{% csrf_token %}
+  <label>確認した施設管理責任者の名前</label>
+  {{ rseal.roomSeal }}
+  <button type="submit">確認</button>
+</form>
+{% endif %}
+{% endif %}
+
+<form action="{% url 'Mainapp:delform' month_current.year month_current.month month_current.day checkschedule.id roomFilter %}" method="POST">{% csrf_token %}
+  <label>削除確認の為の登録者四桁番号入力</label>
+  <input type="text" name="StudentNum">
+  <button type="submit" onclick='return confirm("本当に削除しますか？");'>削除する</button>
+</form>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% load static %}
+  <link rel="icon" type=”image/x-icon” href='{% static "Mainapp/favicon.ico" %}'>
+  <link rel="stylesheet" href='{% static "Mainapp/content.css" %}'>
+  <title>部屋予約</title>
+</head>
+
+<body style="padding:0;margin:0">
+
+  <div>
+    {% block content %}{% endblock %}
+  </div>
+</body>
+
+</html>

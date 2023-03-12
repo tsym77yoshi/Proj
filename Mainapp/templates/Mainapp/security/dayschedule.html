@@ -1,0 +1,60 @@
+<div style="padding:10px 0;width:100%;background-color: #EEEEEE;">
+  <p style="text-align: center;">
+    {{ month_current | date:"Y年m月d日" }}の予定
+  </p>
+  <!--eventの部分-->
+  {% for event in events %}
+  <div style="margin:10px;padding:2px 15px;background-color: #D9D9D9;display: flex;">
+    {{ event.name }}
+  </div>
+  {% endfor %}
+  <!--scheduleの部分-->
+  {% for schedule in schedules %}
+  <div style="margin:10px;padding:2px 15px;background-color: #D9D9D9;display:block">
+    <div>
+      <form id="form{{forloop.counter0}}" action="{% url 'Mainapp:securityfinishform' schedule.id %}" method="POST">{% csrf_token %}
+        {% for stateform in stateforms %}
+          {% if forloop.counter0 == forloop.parentloop.counter0 %}<label>使用状況{{ stateform.state }}</label>{% endif %}
+        {% endfor %}
+      </form>
+    </div>
+    <div style="display: flex;">
+      <div>
+        <p>{{ schedule.time }}＠{{ schedule.place }}</p>
+        <p>{{ schedule.organization }}</p>
+      </div>
+      <div style="margin:0 0 0 auto">
+
+        {% if schedule.teacherSeal %}<p>{{schedule.teacherSeal}}</p>{% else %}<p style="color:red">未承認</p>{% endif %}
+
+        {% if schedule.affairsSeal %}<p>{{schedule.affairsSeal}}</p>{% else %}<p style="color:red">未承認</p>{% endif %}
+
+        {% if schedule.place.IsNeedCheck %}
+        {% if schedule.roomSeal %}<p>{{schedule.roomSeal}}</p>{% else %}<p style="color:red">未承認</p>{% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<script>
+  let el = document.getElementsByClassName("forms");
+
+  const funcCheck = (order) => {
+    let form = document.getElementById("form" + order)
+    const formData = new FormData(form);  // フォームデータを取得する
+    const xhr = new XMLHttpRequest();  // Ajaxリクエストを作成する
+    xhr.open('POST', form.action);  // リクエストの詳細を設定する
+    xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');  // CSRFトークンを設定する
+    xhr.onload = () => {
+      // レスポンスを受け取った後の処理
+      console.log(xhr.responseText);
+    };
+    xhr.send(formData);  // リクエストを送信する
+  }
+
+  //値を変更した時
+  for (let i = 0; i < el.length; i++) {
+    el[i].addEventListener("change", function() {funcCheck(i)});
+  }
+</script>

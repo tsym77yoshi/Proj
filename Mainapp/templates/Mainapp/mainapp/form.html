@@ -1,0 +1,26 @@
+<form action="{% url 'Mainapp:form' 'post' 0 roomFilter %}" method="POST">{% csrf_token %}
+  <table>
+    <tr>
+      <th>日付</th>
+      <td>{{ form.date.value }}</td>
+      <td>{{ form.date }}</td>
+    </tr>
+    <tr>
+      <th>時間帯</th>
+      <td>{{ form.time }}</td>
+    </tr>
+    <tr>
+      <th>借りたい教室</th>
+      <td>{{ form.place }}</td>
+    </tr>
+    <tr>
+      <th>組織</th>
+      <td>{{ form.organization }}</td>
+    </tr>
+    <tr>
+      <th>登録者四桁番号</th>
+      <td>{{ form.StudentNum }}</td>
+    </tr>
+  </table>
+  <button type="submit" class="btn">保存</button>
+</form>

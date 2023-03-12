@@ -1,0 +1,23 @@
+{% extends 'Mainapp/base.html' %}
+
+{% block content %}
+
+{% include 'Mainapp/mainapp/isformerror.html' %}
+<div class="container">
+  <div class="leftcon">
+    {% include 'Mainapp/mainapp/head.html' %}
+    <div class="cont">{% include 'Mainapp/mainapp/month.html' %}</div>
+    {% include 'Mainapp/mainapp/dayschedule.html' %}
+  </div>
+  <div class="rightcon">
+    <div class="cont">
+      {% if scheduleid == "new" %}
+        {% include 'Mainapp/mainapp/form.html' %}
+      {% else %}
+        {% include 'Mainapp/mainapp/check.html' %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

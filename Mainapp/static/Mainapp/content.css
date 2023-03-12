@@ -1,0 +1,30 @@
+/* PC画面用のスタイル */
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.leftcon {
+  width: 60%;
+}
+
+.rightcon {
+  width: 40%;
+}
+
+/* スマートフォン画面用のスタイル */
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .leftcon,
+  .rightcon {
+    width: 100%;
+  }
+}
+
+/* 各々で周りに隙間をつける */
+.cont {
+  padding: 10px
+}

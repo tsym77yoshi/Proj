@@ -1,0 +1,36 @@
+<div style="text-align: center">
+  <a href="{% url 'Mainapp:schedule' month_previous.year month_previous.month roomFilter %}">前月</a>
+  {{ month_current | date:"Y年m月" }}
+  <a href="{% url 'Mainapp:schedule' month_next.year month_next.month roomFilter %}">次月</a>
+
+  <table class="table" border=1 style="width:100%;background-color: #EEEEEE;">
+    <thead>
+      <tr>
+        {% for w in week_names %}
+        <th style="width:14%">{{ w }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for week in month_days %}
+      <tr>
+        {% for day in week %}
+        {% if month_current.month == day.month and month_current.day == day.day %}
+        <td style="background-color:#9086ff;color:white">
+        {% else %}
+        <td>
+        {% endif %}
+
+          {% if month_current.month != day.month %}
+          {{ day | date:"m/d" }}
+          {% else %}
+          <a href="{% url 'Mainapp:schedule' month_current.year month_current.month day.day roomFilter %}">{{ day.day }}</a>
+          {% endif %}
+
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

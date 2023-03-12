@@ -1,0 +1,55 @@
+<div style="padding:10px 0;width:100%;background-color: #EEEEEE;">
+  <p style="text-align: center;">
+      {{ month_current | date:"Y年m月d日" }}の予定
+  </p>
+<!--eventの部分-->
+{% for event in events %}
+<div style="margin:10px;padding:2px 15px;background-color: #D9D9D9;display: flex;">
+    {{ event.name }}
+</div>
+{% endfor %}
+<!--scheduleの部分-->
+{% for schedule in schedules %}
+  {% if schedule.id == scheduleid %}
+  <a style="margin:10px;border:2px solid blue;padding:0 13px;background-color: #D9D9D9;display: flex;">
+  {% else %}
+  <a href="{% url 'Mainapp:scheduleid' schedule.id roomFilter %}" style="margin:10px;padding:2px 15px;background-color: #D9D9D9;display: flex;">
+  {% endif %}
+    <div>
+      <p>{{ schedule.time }}＠{{ schedule.place }}</p>
+      <p>{{ schedule.organization }}</p>
+    </div>
+    <div style="margin:0 0 0 auto">
+
+      {% if schedule.teacherSeal %}
+      <p>{{schedule.teacherSeal}}</p>
+      {% else %}
+      <p style="color:red">未承認</p>
+      {% endif %}
+      
+      {% if schedule.affairsSeal %}
+      <p>{{schedule.affairsSeal}}</p>
+      {% else %}
+      <p style="color:red">未承認</p>
+      {% endif %}
+
+      {% if schedule.place.IsNeedCheck %}
+        {% if schedule.roomSeal %}
+        <p>{{schedule.roomSeal}}</p>
+        {% else %}
+        <p style="color:red">未承認</p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </a>
+{% endfor %}
+
+{% if scheduleid == "new" %}
+<a style="margin:10px;border:2px solid blue;padding:0 13px;background-color: #D9D9D9;display: flex;text-align: center;">
+{% else %}
+<a href="{% url 'Mainapp:schedule' month_current.year month_current.month month_current.day roomFilter %}" style="margin:10px;padding:2px 15px;background-color: #D9D9D9;display: flex;text-align: center;">
+{% endif %}
+新規作成
+</a>
+
+</div>

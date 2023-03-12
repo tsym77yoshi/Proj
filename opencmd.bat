@@ -1,0 +1,1 @@
+cd %~dp0 & cd .. & venv\Scripts\activate & cd Proj & cmd /k

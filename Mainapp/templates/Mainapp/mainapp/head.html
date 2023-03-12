@@ -1,0 +1,29 @@
+<div style="width:100%;background-color: #D9D9D9;">
+  <div style="padding:10px;display:flex">
+    <div style="padding:5px;border:1px solid black">
+      部屋の絞り込み
+      <button id="changefilterhead">詳細</button>
+    </div>
+    <div style="margin:0 0 0 auto;padding:5px 1em;border:1px solid black;Border-radius:10%;background-color: greenyellow;text-align: center;">
+      {{ user.get_username }}
+      <a href="{% url 'authapp:logout' %}" style="font-size: 0.8em;">(Logout)</a>
+    </div>
+  </div>
+</div>
+<div id="headfilter" style="display: none;">
+  {% include 'Mainapp/mainapp/selectRoom.html' %}
+</div>
+
+<script>
+  let changefilterhead = document.getElementById("changefilterhead");
+  let headfilter = document.getElementById("headfilter");
+  changefilterhead.addEventListener("click", () => {
+    if(headfilter.style.display==='block'){
+        headfilter.style.display='none'
+    }
+    else{
+        headfilter.style.display='block'
+    }
+  }, false);
+
+</script>

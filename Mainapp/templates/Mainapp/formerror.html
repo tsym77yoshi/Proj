@@ -1,0 +1,7 @@
+<p>フォームの送信に失敗しました</p>
+{% if form %}
+  {{form.errors}}
+{% endif %}
+{% if message %}
+  {{message}}
+{% endif %}

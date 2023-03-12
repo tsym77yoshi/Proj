@@ -1,0 +1,75 @@
+<div style="background-color: aliceblue;padding:10px">
+  <form action="{% url 'Mainapp:filter' month_current.year month_current.month month_current.day %}" method="post">
+    {% csrf_token %}
+    <label><input id="checkAllselectRoom" name="all" type="checkbox" value="all">全て選択</label>
+    <hr>
+    {% for areas in Area %}
+    <div>
+      {{areas.name}}
+      {% for rooms in areas.room_set.all %}
+      <label><input class="checksselectRoom" name="rooms" type="checkbox" id="checksselectRoom{{ rooms.id }}" value="{{ rooms.id }}">{{rooms.name}}</label>
+      {% endfor %}
+      <hr>
+    </div>
+    {% endfor %}
+    <button type="submit">絞り込み</button>
+  </form>
+</div>
+
+<script>
+  //「全て選択」のチェックボックス
+  let checkAll = document.getElementById("checkAllselectRoom");
+  //「全て選択」以外のチェックボックス
+  let el = document.getElementsByClassName("checksselectRoom");
+
+  //全てのチェックボックスをON/OFFする
+  const funcCheckAll = (bool) => {
+    for (let i = 0; i < el.length; i++) {
+      el[i].checked = bool;
+    }
+  }
+
+  //「checks」のclassを持つ要素のチェック状態で「全て選択」のチェック状態をON/OFFする
+  const funcCheck = () => {
+    let count = 0;
+    for (let i = 0; i < el.length; i++) {
+      if (el[i].checked) {
+        count += 1;
+      }
+    }
+
+    if (el.length === count) {
+      checkAll.checked = true;
+    } else {
+      checkAll.checked = false;
+    }
+  };
+
+  //「全て選択」のチェックボックスをクリックした時
+  checkAll.addEventListener("click", () => {
+    funcCheckAll(checkAll.checked);
+  }, false);
+
+  //「全て選択」以外のチェックボックスをクリックした時
+  for (let i = 0; i < el.length; i++) {
+    el[i].addEventListener("click", funcCheck, false);
+  }
+
+
+  //ロード時
+  window.addEventListener('load', function() {
+    {% autoescape off %}
+    let loadchecked='{{ roomFilter }}'
+    {% endautoescape %}
+    if(loadchecked=='all'){
+      checkAll.checked=true
+      funcCheckAll(checkAll.checked);
+    }
+    else{
+      loadchecked=loadchecked.split('_')
+      for(var i=0;i<loadchecked.length;i++){
+        document.getElementById("checksselectRoom"+loadchecked[i]).checked=true
+      }
+    }
+  })
+</script>
