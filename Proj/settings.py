@@ -76,8 +76,11 @@ WSGI_APPLICATION = 'Proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+       'ENGINE': 'django.db.backends.mysql',
+       'HOST': '/cloudsql/[YOUR_INSTANCE_CONNECTION_NAME]',
+       'USER': '[YOUR-USERNAME]',
+       'PASSWORD': '[YOUR-PASSWORD]',
+       'NAME': '[YOUR-DATABASE]',
     }
 }
 

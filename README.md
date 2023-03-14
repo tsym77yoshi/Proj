@@ -1,8 +1,8 @@
 # 部屋管理システムについて
 ## 開発環境
 この1個上の階層にvenvというvenv（Python3.9）を作成。requirements.txtのやつがインストールされている。
-local_setting.pyなるファイルが存在。settings.txtのDEBUGをTrueに変更すること。
-また、staticfilesを生成するのは、opencmd.batで場所を開く→python manage.py collectstaticというコマンド
+ローカルにはsecretkey.pyなるファイルが存在。
+また、staticfilesを生成するのは、opencmd.batで場所を開く→python manage.py collectstaticというコマンドで
 
 ## 使い方
 まず、
@@ -64,3 +64,6 @@ roomのIsAvailableのチェックボックスを外して保存してくださ�
 絶対にユーザー名を変えないでください。アクセスできるかをユーザー名で認証しています。ユーザーの欄からパスワードは変更できます。
 - 年のはじめ
 eventから年間行事を設定してください。なくても動作します。
+
+## アップロードについて
+gcloudにアップロードできるように設定をしています。
