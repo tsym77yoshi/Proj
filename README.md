@@ -2,21 +2,22 @@
 ## 開発環境
 この1個上の階層にvenvというvenv（Python3.9）を作成。requirements.txtのやつがインストールされている。
 ローカルにはsecretkey.pyなるファイルが存在。
-また、staticfilesを生成するのは、opencmd.batで場所を開く→python manage.py collectstaticというコマンドで
+また、staticfilesを生成するのは、opencmd.batで場所を開く→python manage.py collectstaticというコマンドで静的ファイルを集める
 
 ## 使い方
 まず、
-（開発環境のリンク、<lnk>とおく）
-にアクセスしてください
+（アプリのリンク、＜lnk＞とおく）
+にアクセスしてください（開発勢の人はrunserver.batを実行※windows限定）
 すると、ログインページに飛ばされると思います。（ちなみにどのページにアクセスしてもログインページに飛ばされます）
 
 アカウント（3種類）
-User_name:admin（adminページにもアクセスできるsuperuser）
+- User_name:admin（adminページにもアクセスできるsuperuser）
 pass:
-User_name:staff
+- User_name:staff
 pass:
-User_name:student
+- User_name:student
 pass:
+
 （データベースリセットを行ってパスワードをユーザーごと消してください）
 
 ログイン後、最初のリンクにもう一回アクセスし直せば目的のページに移動できます。
@@ -33,7 +34,7 @@ pass:
 データベースを操作するためのフォームです。userがadmin(superuser)ならばアクセスできます。
 
 ## リンクについての詳細説明
-※ /○○… となっているリンクは<lnk>/○○…の意味です。また、<str:hogehoge>はここにstr型（文字列）が入る（intなら数字）ということを表しています。
+※ /○○… となっているリンクは＜lnk＞/○○…の意味です。また、<str:hogehoge>はここにstr型（文字列）が入る（intなら数字）ということを表しています。
 - 普段使いする時
 / にアクセスしてもらえればアクセス日で開きます。その後、カレンダーの月変更を選択するとに、カレンダーそのものの日付を押すと/month/<int:year>/<int:month>/<int:day>/all/になります。
 また、絞り込みを設定すると最後が/all/から部屋idをアンダーバーで繋いだもの（<str:roomFilter>）に変わります。
