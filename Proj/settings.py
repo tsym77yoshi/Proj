@@ -12,9 +12,19 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+
+#.envファイルの場所指定
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
+
+SECRET_KEY = env('SECRET_KEY')#シークレットキーは.envに記述
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -77,10 +87,10 @@ WSGI_APPLICATION = 'Proj.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.mysql',
-       'HOST': '/cloudsql/[YOUR_INSTANCE_CONNECTION_NAME]',
-       'USER': '[YOUR-USERNAME]',
-       'PASSWORD': '[YOUR-PASSWORD]',
-       'NAME': '[YOUR-DATABASE]',
+       'HOST': '/cloudsql/{}'.format(env('DB_HOST')),
+       'USER': env('DB_USER'),
+       'PASSWORD': env('DB_PASSWORD'),
+       'NAME': env('DB_NAME'),
     }
 }
 
@@ -120,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

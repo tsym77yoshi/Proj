@@ -22,5 +22,5 @@ opencmd.bat
 README.md
 runserver.bat
 Proj/local_settings.py
-Proj/secretkey.py
-Mainapp/static
+
+cloud-sql-proxy.x64.exe

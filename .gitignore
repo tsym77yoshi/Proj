@@ -3,5 +3,5 @@
 db.sqlite3
 __pycache__
 .DS_Store
-staticfiles
-Proj/secretkey.py
+.env
+static

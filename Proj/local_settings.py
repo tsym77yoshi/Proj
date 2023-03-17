@@ -2,11 +2,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-try:
-    from .secretkey import *
-except ImportError:
-    pass
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
