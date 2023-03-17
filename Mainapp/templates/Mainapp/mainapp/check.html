@@ -17,6 +17,13 @@
       <td>{{ checkschedule.organization }}</td>
     </tr>
     <tr style="height: 1em;"></tr>
+    {% if user.get_username == "staff" or user.get_username == "admin" %}
+    <tr>
+      <th>登録した生徒</th>
+      <td>{{ checkschedule.StudentNum }}</td>
+    </tr>
+    <tr style="height: 1em;"></tr>
+    {% endif %}
     <tr>
       <th>確認した先生</th>
       <td>{{ checkschedule.teacherSeal }}</td>
